@@ -38,18 +38,15 @@ const reducer = (state = initialState, action)=>{
                 error: action.payload
             });
         case(ADD_SMURF):
-            const newSmurf = {
-                ...action.payload,
-                id: Date.now()
-            }
             return({
                 ...state,
-                smurf: [...state.smurf, newSmurf]
+                // smurf: [...state.smurf, action.payload]
+                smurf: action.payload
             });
         case(ERROR_MESSAGE):
             return({
                 ...state,
-                error: ''
+                error: action.payload
             });
         default: 
             return state;
