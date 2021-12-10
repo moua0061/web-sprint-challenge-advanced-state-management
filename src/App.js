@@ -1,19 +1,23 @@
-import React, { Component } from "react";
-import { createStore, applyMiddleware } from "redux";
-import logger from 'redux-logger';
-import thunk from 'redux-thunk';
+import React, { Component, useEffect } from "react";
+import { connect } from 'react-redux';
 
 import AddForm from './components/AddForm';
 import SmurfList from './components/SmurfList';
 import Header from './components/Header';
-import reducer from "./reducers";
+
+import { fetchSmurfs } from "./actions";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
-const store = createStore(reducer, applyMiddleware(thunk, logger))
 
-const App = ()=> {
+
+const App = (props)=> {
+
+  useEffect(() => {
+    props.fetchSmurfs();
+  },[])
+
   return (
     <div className="App">
       <Header />
@@ -26,7 +30,7 @@ const App = ()=> {
   );
 }
 
-export default App;
+export default connect(null, {fetchSmurfs})(App);
 
 //Task List:
 //1. Connect the fetchSmurfs actions to the App component.

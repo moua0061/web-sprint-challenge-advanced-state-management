@@ -1,3 +1,11 @@
+import { 
+        FETCH_START, 
+        FETCH_SUCCESS, 
+        FETCH_FAIL, 
+        ADD_SMURF, 
+        ERROR_MESSAGE 
+    } from '..//actions'
+
 
 export const initialState = {
         smurf: [],
@@ -7,31 +15,29 @@ export const initialState = {
 
 const reducer = (state = initialState, action)=>{
 
-    console.log(state);
-
     switch(action.type){
-        case('FETCH_START'):
+        case(FETCH_START):
             return({
                 ...state,
                 smurf: [],
                 isLoading: true,
                 error: ''
             });
-        case('FETCH_SUCCESS'):
+        case(FETCH_SUCCESS):
             return({
                 ...state,
                 smurf: action.payload,
                 isLoading: false,
                 error: ''
             });
-        case('FETCH_FAIL'):
+        case(FETCH_FAIL):
             return({
                 ...state,
                 smurf: [],
                 isLoading: false,
                 error: action.payload
             });
-        case('ADD_SMURF'):
+        case(ADD_SMURF):
             const newSmurf = {
                 ...action.payload,
                 id: Date.now()
@@ -40,10 +46,10 @@ const reducer = (state = initialState, action)=>{
                 ...state,
                 smurf: [...state.smurf, newSmurf]
             });
-        case('ERROR_MESSAGE'):
+        case(ERROR_MESSAGE):
             return({
                 ...state,
-                error: 'your smurfs is not working!'
+                error: ''
             });
         default: 
             return state;
